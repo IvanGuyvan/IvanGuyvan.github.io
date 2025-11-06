@@ -1,1 +1,655 @@
-probable fishtich
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Ivan Guyvan · Visual Artist Portfolio</title>
+	<meta name="description" content="The contemporary art portfolio of Ivan Guyvan featuring immersive visual storytelling and digital compositions." />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			color-scheme: dark;
+			--background: #0f0f11;
+			--surface: rgba(255, 255, 255, 0.08);
+			--surface-alt: rgba(255, 255, 255, 0.12);
+			--accent: #8ef9f3;
+			--accent-strong: #50f6e8;
+			--text: #f3f4f6;
+			--text-muted: rgba(243, 244, 246, 0.7);
+			--shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+			--transition: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+			scroll-behavior: smooth;
+		}
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			background: radial-gradient(circle at top right, rgba(80, 246, 232, 0.08), transparent 45%),
+				radial-gradient(circle at bottom left, rgba(142, 249, 243, 0.12), transparent 50%),
+				var(--background);
+			color: var(--text);
+			line-height: 1.6;
+			min-height: 100vh;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		img {
+			max-width: 100%;
+			display: block;
+		}
+
+		header.hero {
+			padding: 4.5rem clamp(1.5rem, 5vw, 4rem) 2rem;
+			position: relative;
+			overflow: hidden;
+		}
+
+		header.hero::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(135deg, rgba(80, 246, 232, 0.14), transparent 65%);
+			pointer-events: none;
+		}
+
+		.hero-content {
+			max-width: 960px;
+			margin: 0 auto;
+			position: relative;
+			z-index: 1;
+			display: grid;
+			gap: 1.5rem;
+		}
+
+		.pill {
+			width: fit-content;
+			padding: 0.35rem 0.85rem;
+			border-radius: 999px;
+			background: var(--surface);
+			color: var(--accent);
+			font-weight: 500;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+			font-size: 0.7rem;
+		}
+
+		.hero-content h1 {
+			margin: 0;
+			font-family: "Playfair Display", serif;
+			font-size: clamp(2.8rem, 6vw, 4.8rem);
+			letter-spacing: -0.015em;
+			line-height: 1.08;
+		}
+
+		.hero-content p {
+			margin: 0;
+			max-width: 560px;
+			font-size: clamp(1rem, 2.5vw, 1.25rem);
+			color: var(--text-muted);
+		}
+
+		.cta-row {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 1rem;
+			margin-top: 0.5rem;
+		}
+
+		.cta-row .cta-button {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.6rem;
+			padding: 0.75rem 1.4rem;
+			border-radius: 999px;
+			background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+			color: #062623;
+			font-weight: 600;
+			letter-spacing: 0.02em;
+			text-decoration: none;
+			transition: transform var(--transition), box-shadow var(--transition);
+			box-shadow: 0 12px 24px rgba(80, 246, 232, 0.25);
+		}
+
+		.cta-row .cta-button:hover {
+			transform: translateY(-2px) scale(1.01);
+			box-shadow: 0 16px 36px rgba(80, 246, 232, 0.35);
+		}
+
+		.cta-row .cta-button svg {
+			width: 18px;
+			height: 18px;
+		}
+
+		main {
+			padding: 0 clamp(1.5rem, 5vw, 4rem) 4rem;
+		}
+
+		section {
+			max-width: 1040px;
+			margin: 0 auto;
+			padding-block: clamp(2.5rem, 6vw, 4rem);
+		}
+
+		section h2 {
+			margin-top: 0;
+			font-family: "Playfair Display", serif;
+			font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+			letter-spacing: -0.01em;
+		}
+
+		.section-intro {
+			max-width: 720px;
+			color: var(--text-muted);
+			font-size: 1.05rem;
+		}
+
+		.bio-grid {
+			display: grid;
+			gap: 1.8rem;
+		}
+
+		.bio-grid article {
+			background: var(--surface);
+			border-radius: 24px;
+			padding: clamp(1.5rem, 4vw, 2.4rem);
+			backdrop-filter: blur(18px);
+			box-shadow: var(--shadow);
+		}
+
+		.bio-grid h3 {
+			margin-top: 0;
+			font-size: 1.35rem;
+			color: var(--accent);
+			letter-spacing: 0.03em;
+			text-transform: uppercase;
+		}
+
+		.bio-grid p {
+			margin-bottom: 0;
+			color: var(--text-muted);
+		}
+
+		.gallery-grid {
+			display: grid;
+			gap: 1.1rem;
+			margin-top: 2.5rem;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		}
+
+		.art-card {
+			position: relative;
+			border-radius: 18px;
+			overflow: hidden;
+			background: var(--surface-alt);
+			box-shadow: var(--shadow);
+			transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
+		}
+
+		.art-card button {
+			display: block;
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			border: 0;
+			background: transparent;
+			cursor: pointer;
+		}
+
+		.art-card img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform var(--transition), filter var(--transition);
+		}
+
+		.art-card::after {
+			content: "View";
+			position: absolute;
+			inset: auto 12px 12px auto;
+			padding: 0.35rem 0.8rem;
+			border-radius: 999px;
+			background: rgba(15, 15, 17, 0.65);
+			color: var(--accent);
+			font-size: 0.75rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			opacity: 0;
+			transform: translateY(6px);
+			transition: var(--transition);
+		}
+
+		.art-card:hover {
+			transform: translateY(-4px) scale(1.01);
+			box-shadow: 0 24px 40px rgba(0, 0, 0, 0.4);
+		}
+
+		.art-card:hover img {
+			transform: scale(1.05);
+			filter: saturate(1.1);
+		}
+
+		.art-card:hover::after {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		footer {
+			padding: 3rem clamp(1.5rem, 5vw, 4rem) 4rem;
+			background: rgba(8, 8, 10, 0.8);
+			border-top: 1px solid rgba(255, 255, 255, 0.05);
+			text-align: center;
+			color: var(--text-muted);
+		}
+
+		footer span {
+			display: block;
+			margin-top: 0.6rem;
+			font-size: 0.85rem;
+			letter-spacing: 0.08em;
+		}
+
+		.lightbox {
+			position: fixed;
+			inset: 0;
+			background: rgba(9, 10, 12, 0.92);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: clamp(1.5rem, 4vw, 4rem);
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity var(--transition);
+			z-index: 999;
+		}
+
+		.lightbox.is-active {
+			opacity: 1;
+			pointer-events: all;
+		}
+
+		.lightbox__inner {
+			position: relative;
+			max-width: min(100%, 1024px);
+			width: 100%;
+		}
+
+		.lightbox__image-wrapper {
+			position: relative;
+			overflow: hidden;
+			border-radius: 18px;
+			background: #050506;
+			box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+		}
+
+		.lightbox__image-wrapper img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		.lightbox__meta {
+			margin-top: 1rem;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			color: var(--text-muted);
+			font-size: 0.95rem;
+		}
+
+		.lightbox__actions {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			pointer-events: none;
+		}
+
+		.lightbox__button,
+		.lightbox__close {
+			pointer-events: all;
+			border: 0;
+			background: rgba(15, 15, 17, 0.7);
+			color: var(--text);
+			border-radius: 999px;
+			width: 44px;
+			height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: background var(--transition), transform var(--transition);
+			backdrop-filter: blur(10px);
+		}
+
+		.lightbox__button:hover,
+		.lightbox__close:hover {
+			background: rgba(142, 249, 243, 0.2);
+			transform: translateY(-1px);
+		}
+
+		.lightbox__close {
+			position: absolute;
+			top: -52px;
+			right: 0;
+		}
+
+		@media (max-width: 760px) {
+			header.hero {
+				padding-top: 3.25rem;
+			}
+
+			.bio-grid {
+				gap: 1.4rem;
+			}
+
+			.lightbox__close {
+				top: -56px;
+			}
+
+			.lightbox__meta {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+
+		@media (min-width: 720px) {
+			.bio-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (min-width: 980px) {
+			header.hero {
+				padding-top: 6rem;
+				padding-bottom: 3.5rem;
+			}
+
+			.hero-content {
+				gap: 2rem;
+			}
+
+			.bio-grid {
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+			}
+
+			.gallery-grid {
+				gap: 1.4rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<header class="hero">
+		<div class="hero-content">
+			<span class="pill">Visual Artist</span>
+			<h1>Ivan Guyvan crafts immersive dreamscapes and digital narratives.</h1>
+			<p>
+				A contemporary artist blending analogue textures, motion, and ethereal palettes to explore identity,
+				connection, and the spaces in between. Dive into curated highlights from recent exhibitions and
+				explorations.
+			</p>
+			<div class="cta-row">
+				<a class="cta-button" href="https://instagram.com/ivanguyvan" target="_blank" rel="noopener noreferrer">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<rect x="3" y="3" width="18" height="18" rx="5"></rect>
+						<path d="M16 11.37A3.37 3.37 0 1 1 12.63 8 3.37 3.37 0 0 1 16 11.37z"></path>
+						<path d="M17.5 6.5h.01"></path>
+					</svg>
+					Follow on Instagram
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section id="about">
+			<h2>About the Practice</h2>
+			<p class="section-intro">
+				Ivan Guyvan’s multidisciplinary work translates fleeting emotions into luminous compositions. Each series
+				is an experiment in texture and rhythm, inviting viewers to slow down, notice the gradients between
+				presence and memory, and reimagine their own narratives through color, form, and light.
+			</p>
+		</section>
+
+		<section id="bio">
+			<h2>Artist Bio</h2>
+			<div class="bio-grid">
+				<article>
+					<h3>Roots</h3>
+					<p>
+						Born and raised along the Baltic coast, Ivan’s early years were shaped by fog-soaked horizons
+						and the kinetic pulse of street art. The result: a fascination with blending organic depth and
+						digital precision.
+					</p>
+				</article>
+				<article>
+					<h3>Process</h3>
+					<p>
+						Ivan combines analog collage, generative techniques, and layered photography. Each piece moves
+						through sketchbooks, digital renders, and atmospheric printing to arrive at a resonant final
+						form.
+					</p>
+				</article>
+				<article>
+					<h3>Highlights</h3>
+					<p>
+						Recent exhibitions include “Chromatic Echoes” (Tallinn), “Shifting Tides” (Berlin), and a
+						residency with the New North Collective. Commissioned works explore identity, memory, and the
+						tension between structure and fluidity.
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section id="portfolio">
+			<h2>Selected Works</h2>
+			<p class="section-intro">
+				A rotating collection of pieces created between 2023 and 2025. Tap any piece to view it fullscreen.
+			</p>
+			<div class="gallery-grid" role="list">
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241114_Meyers_Evian_DigitalPainting_Clown.jpg" data-title="Digital Ringleader" data-description="High-energy digital painting exploring carnival archetypes and electric motion.">
+						<img src="portfolio/20241114_Meyers_Evian_DigitalPainting_Clown.jpg" alt="Expressive digital clown portrait with neon strokes titled Digital Ringleader." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpeg" data-title="Graphite Gaze" data-description="Soft pencil portrait capturing quiet resilience and luminous highlights.">
+						<img src="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpeg" alt="Soft graphite portrait of a figure with reflective lighting titled Graphite Gaze." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpg" data-title="Contour Study" data-description="Detailed pencil rendering exploring contour lines and subtle motion.">
+						<img src="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpg" alt="Detailed pencil profile study titled Contour Study." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241114_Meyers_Evian_SketchBookPge_ColoredPncil.jpg" data-title="Sketchbook Spectrum" data-description="Mixed-media sketchbook page weaving colored pencil gradients and gestural notes.">
+						<img src="portfolio/20241114_Meyers_Evian_SketchBookPge_ColoredPncil.jpg" alt="Sketchbook spread layered with colored pencil gradients titled Sketchbook Spectrum." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241114_Meyers_Evian_Sketchbook_Page_AcrylicPnt_ColoredPncil_Pencil.jpg" data-title="Layered Reverie" data-description="Acrylic, pencil, and colored pencil converge to map dreamlike architecture.">
+						<img src="portfolio/20241114_Meyers_Evian_Sketchbook_Page_AcrylicPnt_ColoredPncil_Pencil.jpg" alt="Multimedia sketchbook page with acrylic washes and line work titled Layered Reverie." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Portrait_Micron_Marker.jpg" data-title="Micron Flow" data-description="Micron marker study tracing flowing linework and sharp geometry.">
+						<img src="portfolio/20241115_Meyers_Evian_Portrait_Micron_Marker.jpg" alt="Micron marker portrait with graphic linework titled Micron Flow." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Portrait_Pen_and_Colored_Pencil.jpg" data-title="Chromatic Quiet" data-description="Pen and colored pencil portrait balancing saturated color with meditative calm.">
+						<img src="portfolio/20241115_Meyers_Evian_Portrait_Pen_and_Colored_Pencil.jpg" alt="Pen and colored pencil portrait with warm gradients titled Chromatic Quiet." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Postcard_Drawing_Marker_GelPen_ColoredPncil.jpeg" data-title="Postcard Pulse" data-description="Marker and gel pen composition imagined as mailable kinetic energy.">
+						<img src="portfolio/20241115_Meyers_Evian_Postcard_Drawing_Marker_GelPen_ColoredPncil.jpeg" alt="Color-rich postcard drawing with energetic strokes titled Postcard Pulse." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Scorpion_Micron_Marker.jpg" data-title="Scorpion Study" data-description="Micron marker illustration examining protective armor and fluid movement.">
+						<img src="portfolio/20241115_Meyers_Evian_Scorpion_Micron_Marker.jpg" alt="Micron marker drawing of a scorpion titled Scorpion Study." loading="lazy" />
+					</button>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/20241122_Meyers_Evian_Figure_Study_Pencil.jpg" data-title="Figure Study" data-description="Exploratory pencil figure study focused on gesture and quiet tension.">
+						<img src="portfolio/20241122_Meyers_Evian_Figure_Study_Pencil.jpg" alt="Pencil figure drawing capturing gesture and form titled Figure Study." loading="lazy" />
+					</button>
+				</figure>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div>
+			<strong>&copy; <span id="year"></span> Ivan Guyvan</strong>
+			<span>Portfolio curated for collectors, collaborators, and curious minds.</span>
+		</div>
+	</footer>
+
+	<div class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-describedby="lightbox-description">
+		<div class="lightbox__inner">
+			<button class="lightbox__close" type="button" aria-label="Close artwork view">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M18 6 6 18"></path>
+					<path d="M6 6l12 12"></path>
+				</svg>
+			</button>
+			<div class="lightbox__image-wrapper">
+				<img id="lightbox-image" src="" alt="" />
+				<div class="lightbox__actions">
+					<button class="lightbox__button" type="button" data-direction="prev" aria-label="View previous artwork">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="15 6 9 12 15 18"></polyline>
+						</svg>
+					</button>
+					<button class="lightbox__button" type="button" data-direction="next" aria-label="View next artwork">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="9 6 15 12 9 18"></polyline>
+						</svg>
+					</button>
+				</div>
+			</div>
+			<div class="lightbox__meta">
+				<div>
+					<strong id="lightbox-title"></strong>
+					<p id="lightbox-description"></p>
+				</div>
+				<span id="lightbox-counter"></span>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const yearEl = document.getElementById("year");
+		yearEl.textContent = new Date().getFullYear();
+
+		const lightbox = document.querySelector(".lightbox");
+		const lightboxImage = document.getElementById("lightbox-image");
+		const lightboxTitle = document.getElementById("lightbox-title");
+		const lightboxDescription = document.getElementById("lightbox-description");
+		const lightboxCounter = document.getElementById("lightbox-counter");
+		const closeButton = document.querySelector(".lightbox__close");
+		const navButtons = document.querySelectorAll(".lightbox__button");
+		const galleryButtons = Array.from(document.querySelectorAll(".art-card button"));
+
+		let currentIndex = 0;
+		let focusTrigger = null;
+
+		function updateLightbox(index) {
+			const button = galleryButtons[index];
+			if (!button) return;
+
+			const fullSrc = button.getAttribute("data-full");
+			const title = button.getAttribute("data-title") ?? "Artwork";
+			const description = button.getAttribute("data-description") ?? "";
+
+			lightboxImage.src = fullSrc;
+			lightboxImage.alt = title;
+			lightboxTitle.textContent = title;
+			lightboxDescription.textContent = description;
+			lightboxCounter.textContent = `${index + 1} / ${galleryButtons.length}`;
+		}
+
+		function openLightbox(index, trigger) {
+			currentIndex = index;
+			focusTrigger = trigger;
+			updateLightbox(currentIndex);
+			lightbox.classList.add("is-active");
+			document.body.style.overflow = "hidden";
+			closeButton.focus();
+		}
+
+		function closeLightbox() {
+			lightbox.classList.remove("is-active");
+			document.body.style.overflow = "";
+			lightboxImage.src = "";
+			if (focusTrigger) {
+				focusTrigger.focus();
+			}
+		}
+
+		function showAdjacent(direction) {
+			const nextIndex = (currentIndex + direction + galleryButtons.length) % galleryButtons.length;
+			currentIndex = nextIndex;
+			updateLightbox(currentIndex);
+		}
+
+		galleryButtons.forEach((button, index) => {
+			button.addEventListener("click", () => openLightbox(index, button));
+			button.addEventListener("keydown", (event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					event.preventDefault();
+					openLightbox(index, button);
+				}
+			});
+		});
+
+		closeButton.addEventListener("click", closeLightbox);
+
+		lightbox.addEventListener("click", (event) => {
+			if (event.target === lightbox) {
+				closeLightbox();
+			}
+		});
+
+		navButtons.forEach((button) => {
+			const direction = button.getAttribute("data-direction") === "next" ? 1 : -1;
+			button.addEventListener("click", (event) => {
+				event.stopPropagation();
+				showAdjacent(direction);
+			});
+		});
+
+		window.addEventListener("keydown", (event) => {
+			if (!lightbox.classList.contains("is-active")) return;
+
+			if (event.key === "Escape") {
+				closeLightbox();
+			} else if (event.key === "ArrowRight") {
+				showAdjacent(1);
+			} else if (event.key === "ArrowLeft") {
+				showAdjacent(-1);
+			}
+		});
+	</script>
+</body>
+
+</html>
