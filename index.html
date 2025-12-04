@@ -1,3 +1,56 @@
+		.about-layout {
+			display: grid;
+			gap: clamp(1.8rem, 4vw, 3rem);
+			margin-top: clamp(1.5rem, 3vw, 2.2rem);
+			align-items: start;
+		}
+
+		.about-copy {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			font-size: 1.05rem;
+			color: rgba(230, 234, 243, 0.82);
+			line-height: 1.8;
+		}
+
+		.about-highlights {
+			display: grid;
+			gap: 1rem;
+			grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		}
+
+		.about-card {
+			padding: 1.1rem 1.2rem 1.15rem;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(150deg, rgba(17, 23, 36, 0.82), rgba(15, 20, 33, 0.68));
+			box-shadow: 0 14px 28px rgba(8, 12, 23, 0.28);
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			font-size: 0.75rem;
+			color: rgba(230, 234, 243, 0.72);
+		}
+
+		.about-card strong {
+			display: block;
+			font-size: 0.78rem;
+			color: rgba(239, 244, 255, 0.86);
+			margin-bottom: 0.25rem;
+		}
+
+		.about-card a {
+			color: inherit;
+			text-decoration: none;
+			border-bottom: 1px solid rgba(230, 234, 243, 0.24);
+			padding-bottom: 0.15rem;
+			transition: color var(--transition), border-color var(--transition);
+		}
+
+		.about-card a:hover {
+			color: var(--accent);
+			border-color: rgba(116, 245, 233, 0.45);
+		}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +65,19 @@
 	<style>
 		:root {
 			color-scheme: dark;
-			--background: #0f0f11;
+			--background: #04060c;
+			--background-alt: #0b0f1b;
 			--surface: rgba(255, 255, 255, 0.08);
-			--surface-alt: rgba(255, 255, 255, 0.12);
-			--accent: #8ef9f3;
-			--accent-strong: #50f6e8;
-			--text: #f3f4f6;
-			--text-muted: rgba(243, 244, 246, 0.7);
-			--shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+			--surface-alt: rgba(255, 255, 255, 0.14);
+			--surface-glass: rgba(14, 18, 33, 0.55);
+			--accent: #74f5e9;
+			--accent-strong: #76c7ff;
+			--accent-rose: #f0a6ff;
+			--accent-amber: #ffd266;
+			--text: #f5f7fb;
+			--text-muted: rgba(226, 230, 240, 0.76);
+			--shadow: 0 32px 60px rgba(0, 0, 0, 0.45);
+			--soft-shadow: 0 20px 40px rgba(30, 38, 71, 0.35);
 			--transition: 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 			scroll-behavior: smooth;
 		}
@@ -33,12 +91,37 @@
 		body {
 			margin: 0;
 			font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-			background: radial-gradient(circle at top right, rgba(80, 246, 232, 0.08), transparent 45%),
-				radial-gradient(circle at bottom left, rgba(142, 249, 243, 0.12), transparent 50%),
+			background: radial-gradient(120% 120% at 10% 10%, rgba(116, 245, 233, 0.12) 0, transparent 55%),
+				radial-gradient(140% 120% at 90% 0, rgba(240, 166, 255, 0.14) 0, transparent 60%),
+				radial-gradient(circle at center, rgba(118, 199, 255, 0.08), transparent 60%),
 				var(--background);
 			color: var(--text);
 			line-height: 1.6;
 			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		body::before,
+		body::after {
+			content: "";
+			position: fixed;
+			inset: -20vh -20vw auto;
+			height: 80vh;
+			width: 80vw;
+			background: radial-gradient(circle at center, rgba(118, 199, 255, 0.18), transparent 60%);
+			filter: blur(60px);
+			opacity: 0.7;
+			pointer-events: none;
+			mix-blend-mode: screen;
+			z-index: -2;
+		}
+
+		body::after {
+			top: auto;
+			bottom: -10vh;
+			left: auto;
+			right: -15vw;
+			background: radial-gradient(circle at center, rgba(240, 166, 255, 0.16), transparent 60%);
 		}
 
 		a {
@@ -51,81 +134,111 @@
 		}
 
 		header.hero {
-			padding: 4.5rem clamp(1.5rem, 5vw, 4rem) 2rem;
+			padding: clamp(4.5rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem) clamp(3rem, 7vw, 5rem);
 			position: relative;
 			overflow: hidden;
 		}
 
+		header.hero::before,
 		header.hero::after {
 			content: "";
 			position: absolute;
-			inset: 0;
-			background: linear-gradient(135deg, rgba(80, 246, 232, 0.14), transparent 65%);
+			inset: -25% -10%;
+			background: radial-gradient(65% 65% at 20% 20%, rgba(116, 245, 233, 0.26) 0, transparent 65%);
+			filter: blur(40px);
+			opacity: 0.9;
 			pointer-events: none;
+			z-index: 0;
+		}
+
+		header.hero::after {
+			background: radial-gradient(60% 60% at 80% 35%, rgba(240, 166, 255, 0.22) 0, transparent 70%);
+			transform: translateY(10%);
+			opacity: 0.7;
 		}
 
 		.hero-content {
-			max-width: 960px;
+			max-width: 1080px;
 			margin: 0 auto;
 			position: relative;
 			z-index: 1;
 			display: grid;
-			gap: 1.5rem;
+			gap: clamp(1.5rem, 3vw, 2.5rem);
+			padding: clamp(2rem, 3.5vw, 3rem);
+			border-radius: 32px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background:
+				linear-gradient(140deg, rgba(13, 19, 30, 0.92) 0%, rgba(13, 18, 29, 0.76) 50%, rgba(22, 15, 33, 0.6) 100%);
+			backdrop-filter: blur(24px);
+			box-shadow: var(--soft-shadow);
 		}
 
 		.pill {
 			width: fit-content;
-			padding: 0.35rem 0.85rem;
+			padding: 0.4rem 1.1rem;
 			border-radius: 999px;
-			background: var(--surface);
+			background: linear-gradient(135deg, rgba(116, 245, 233, 0.15), rgba(240, 166, 255, 0.18));
 			color: var(--accent);
-			font-weight: 500;
-			letter-spacing: 0.2em;
+			font-weight: 600;
+			letter-spacing: 0.28em;
 			text-transform: uppercase;
-			font-size: 0.7rem;
+			font-size: 0.72rem;
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			box-shadow: inset 0 0 0 1px rgba(116, 245, 233, 0.12);
 		}
 
 		.hero-content h1 {
 			margin: 0;
 			font-family: "Playfair Display", serif;
-			font-size: clamp(2.8rem, 6vw, 4.8rem);
-			letter-spacing: -0.015em;
-			line-height: 1.08;
+			font-size: clamp(3rem, 6vw, 5.2rem);
+			letter-spacing: -0.02em;
+			line-height: 1.05;
+			text-shadow: 0 18px 45px rgba(8, 15, 26, 0.6);
+		}
+
+		.hero-content h1 em {
+			font-style: normal;
+			background: linear-gradient(130deg, var(--accent), var(--accent-rose));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
 		}
 
 		.hero-content p {
 			margin: 0;
-			max-width: 560px;
+			max-width: 620px;
 			font-size: clamp(1rem, 2.5vw, 1.25rem);
 			color: var(--text-muted);
+			line-height: 1.7;
 		}
 
 		.cta-row {
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
-			gap: 1rem;
-			margin-top: 0.5rem;
+			gap: 1.2rem;
+			margin-top: 0.25rem;
 		}
 
 		.cta-row .cta-button {
 			display: inline-flex;
 			align-items: center;
 			gap: 0.6rem;
-			padding: 0.75rem 1.4rem;
+			padding: 0.8rem 1.6rem;
 			border-radius: 999px;
 			background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-			color: #062623;
+			color: #051d1b;
 			font-weight: 600;
-			letter-spacing: 0.02em;
+			letter-spacing: 0.04em;
 			text-decoration: none;
-			transition: transform var(--transition), box-shadow var(--transition);
-			box-shadow: 0 12px 24px rgba(80, 246, 232, 0.25);
+			transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+			box-shadow: 0 16px 30px rgba(118, 199, 255, 0.28);
 		}
 
 		.cta-row .cta-button:hover {
-			transform: translateY(-2px) scale(1.01);
-			box-shadow: 0 16px 36px rgba(80, 246, 232, 0.35);
+			transform: translateY(-3px) scale(1.015);
+			box-shadow: 0 24px 38px rgba(116, 245, 233, 0.4);
+			filter: brightness(1.03);
 		}
 
 		.cta-row .cta-button svg {
@@ -133,69 +246,193 @@
 			height: 18px;
 		}
 
+		.hero-tags {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.65rem;
+		}
+
+		.hero-tags li {
+			padding: 0.45rem 0.9rem;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			font-size: 0.8rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: rgba(239, 244, 255, 0.85);
+			backdrop-filter: blur(12px);
+			transition: transform var(--transition), background var(--transition);
+		}
+
+		.hero-tags li:hover {
+			transform: translateY(-2px);
+			background: linear-gradient(135deg, rgba(116, 245, 233, 0.22), rgba(240, 166, 255, 0.25));
+		}
+
+		.hero-meta {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.hero-note {
+			font-size: 0.85rem;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			color: rgba(226, 230, 240, 0.62);
+		}
+
 		main {
-			padding: 0 clamp(1.5rem, 5vw, 4rem) 4rem;
+			position: relative;
+			padding: 0 clamp(1.5rem, 6vw, 4.5rem) clamp(4rem, 8vw, 6rem);
+		}
+
+		main::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: min(1200px, 92vw);
+			height: 100%;
+			background: linear-gradient(180deg, rgba(12, 16, 28, 0.65) 0%, rgba(12, 16, 28, 0.45) 40%, rgba(7, 10, 18, 0) 100%);
+			filter: blur(40px);
+			opacity: 0.7;
+			pointer-events: none;
+			z-index: 0;
 		}
 
 		section {
-			max-width: 1040px;
+			position: relative;
+			max-width: 1100px;
 			margin: 0 auto;
-			padding-block: clamp(2.5rem, 6vw, 4rem);
+			padding-block: clamp(2.75rem, 6vw, 4.5rem);
+			padding-inline: clamp(1rem, 3vw, 1.8rem);
+		}
+
+		section::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: min(100%, 960px);
+			height: 100%;
+			border-radius: 28px;
+			background: linear-gradient(140deg, rgba(12, 17, 27, 0.78), rgba(12, 18, 30, 0.64));
+			border: 1px solid rgba(255, 255, 255, 0.06);
+			box-shadow: 0 24px 38px rgba(8, 12, 23, 0.35);
+			z-index: -1;
 		}
 
 		section h2 {
-			margin-top: 0;
+			margin: 0 0 0.9rem;
 			font-family: "Playfair Display", serif;
-			font-size: clamp(1.9rem, 3.5vw, 2.6rem);
-			letter-spacing: -0.01em;
+			font-size: clamp(2.1rem, 4vw, 2.9rem);
+			letter-spacing: -0.015em;
+			position: relative;
+		}
+
+		section h2::after {
+			content: "";
+			display: block;
+			margin-top: 0.75rem;
+			width: 58px;
+			height: 3px;
+			border-radius: 999px;
+			background: linear-gradient(90deg, var(--accent), var(--accent-rose));
+			box-shadow: 0 6px 16px rgba(116, 245, 233, 0.3);
 		}
 
 		.section-intro {
-			max-width: 720px;
+			max-width: 760px;
 			color: var(--text-muted);
-			font-size: 1.05rem;
+			font-size: clamp(1.05rem, 2.3vw, 1.18rem);
+			line-height: 1.75;
 		}
 
 		.bio-grid {
 			display: grid;
-			gap: 1.8rem;
+			gap: clamp(1.5rem, 3vw, 2.2rem);
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 		}
 
 		.bio-grid article {
-			background: var(--surface);
-			border-radius: 24px;
-			padding: clamp(1.5rem, 4vw, 2.4rem);
-			backdrop-filter: blur(18px);
-			box-shadow: var(--shadow);
+			position: relative;
+			overflow: hidden;
+			padding: clamp(1.8rem, 4vw, 2.6rem);
+			border-radius: 26px;
+			border: 1px solid rgba(255, 255, 255, 0.09);
+			background: linear-gradient(150deg, rgba(16, 22, 34, 0.95), rgba(16, 21, 34, 0.72));
+			box-shadow: var(--soft-shadow);
+			transition: transform var(--transition), box-shadow var(--transition);
+			z-index: 0;
+		}
+
+		.bio-grid article::before {
+			content: "";
+			position: absolute;
+			inset: -40% -30% 50% -30%;
+			background: radial-gradient(circle at top, rgba(116, 245, 233, 0.18), transparent 65%);
+			opacity: 0.8;
+			filter: blur(30px);
+			pointer-events: none;
+			z-index: -1;
+		}
+
+		.bio-grid article:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 28px 42px rgba(8, 12, 23, 0.45);
 		}
 
 		.bio-grid h3 {
 			margin-top: 0;
 			font-size: 1.35rem;
-			color: var(--accent);
-			letter-spacing: 0.03em;
 			text-transform: uppercase;
+			letter-spacing: 0.18em;
+			color: rgba(242, 247, 255, 0.82);
+			margin-bottom: 0.7rem;
 		}
 
 		.bio-grid p {
-			margin-bottom: 0;
-			color: var(--text-muted);
+			margin: 0;
+			color: rgba(226, 230, 240, 0.78);
+			line-height: 1.75;
 		}
 
 		.gallery-grid {
 			display: grid;
-			gap: 1.1rem;
-			margin-top: 2.5rem;
-			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: clamp(1.1rem, 2vw, 1.6rem);
+			margin-top: clamp(2.2rem, 4vw, 3.2rem);
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			grid-auto-rows: minmax(280px, auto);
 		}
 
 		.art-card {
 			position: relative;
-			border-radius: 18px;
+			border-radius: 20px;
 			overflow: hidden;
-			background: var(--surface-alt);
-			box-shadow: var(--shadow);
-			transition: transform var(--transition), box-shadow var(--transition), border var(--transition);
+			background: linear-gradient(160deg, rgba(17, 23, 36, 0.95), rgba(15, 19, 33, 0.75));
+			box-shadow: var(--soft-shadow);
+			transition: transform var(--transition), box-shadow var(--transition);
+			isolation: isolate;
+			backdrop-filter: blur(6px);
+		}
+
+		.art-card::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			border-radius: inherit;
+			background: linear-gradient(140deg, rgba(116, 245, 233, 0.35), rgba(118, 199, 255, 0.25));
+			opacity: 0;
+			transition: opacity var(--transition);
+			pointer-events: none;
+			mix-blend-mode: screen;
 		}
 
 		.art-card button {
@@ -206,6 +443,18 @@
 			border: 0;
 			background: transparent;
 			cursor: pointer;
+			position: relative;
+			isolation: isolate;
+		}
+
+		.art-card button::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgba(8, 12, 23, 0) 0%, rgba(8, 12, 23, 0.72) 90%);
+			opacity: 0;
+			transition: opacity var(--transition);
+			z-index: 1;
 		}
 
 		.art-card img {
@@ -213,52 +462,92 @@
 			height: 100%;
 			object-fit: cover;
 			transition: transform var(--transition), filter var(--transition);
+			border-radius: inherit;
 		}
 
-		.art-card::after {
-			content: "View";
+		.art-card figcaption {
 			position: absolute;
-			inset: auto 12px 12px auto;
-			padding: 0.35rem 0.8rem;
-			border-radius: 999px;
-			background: rgba(15, 15, 17, 0.65);
-			color: var(--accent);
-			font-size: 0.75rem;
-			letter-spacing: 0.08em;
-			text-transform: uppercase;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			padding: 1.05rem 1.3rem 1.3rem;
+			display: flex;
+			flex-direction: column;
+			gap: 0.35rem;
+			z-index: 2;
+			transform: translateY(10px);
 			opacity: 0;
-			transform: translateY(6px);
-			transition: var(--transition);
+			transition: transform var(--transition), opacity var(--transition);
+			pointer-events: none;
+		}
+
+		.art-card figcaption span {
+			font-size: 1.05rem;
+			font-weight: 600;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: #f7f9ff;
+		}
+
+		.art-card figcaption small {
+			font-size: 0.8rem;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			color: rgba(239, 244, 255, 0.78);
 		}
 
 		.art-card:hover {
-			transform: translateY(-4px) scale(1.01);
-			box-shadow: 0 24px 40px rgba(0, 0, 0, 0.4);
+			transform: translateY(-6px) scale(1.015);
+			box-shadow: 0 28px 42px rgba(6, 9, 17, 0.5);
+		}
+
+		.art-card:hover::before {
+			opacity: 1;
+		}
+
+		.art-card:hover button::after {
+			opacity: 1;
 		}
 
 		.art-card:hover img {
-			transform: scale(1.05);
-			filter: saturate(1.1);
+			transform: scale(1.06);
+			filter: saturate(1.12);
 		}
 
-		.art-card:hover::after {
+		.art-card:hover figcaption {
 			opacity: 1;
 			transform: translateY(0);
 		}
 
 		footer {
-			padding: 3rem clamp(1.5rem, 5vw, 4rem) 4rem;
-			background: rgba(8, 8, 10, 0.8);
-			border-top: 1px solid rgba(255, 255, 255, 0.05);
+			padding: clamp(3rem, 6vw, 4.5rem) clamp(1.5rem, 6vw, 4rem) clamp(3rem, 6vw, 4.5rem);
+			background: linear-gradient(180deg, rgba(10, 12, 22, 0.9) 0%, rgba(10, 12, 22, 0.72) 55%, rgba(6, 8, 15, 0.92) 100%);
+			border-top: 1px solid rgba(255, 255, 255, 0.08);
 			text-align: center;
-			color: var(--text-muted);
+			color: rgba(226, 230, 240, 0.78);
+			position: relative;
+			overflow: hidden;
+			z-index: 0;
+		}
+
+		footer::before {
+			content: "";
+			position: absolute;
+			inset: -40% 0 auto 0;
+			height: 60%;
+			background: radial-gradient(circle at top, rgba(116, 245, 233, 0.12), transparent 70%);
+			filter: blur(40px);
+			opacity: 0.9;
+			pointer-events: none;
+			z-index: -1;
 		}
 
 		footer span {
 			display: block;
 			margin-top: 0.6rem;
 			font-size: 0.85rem;
-			letter-spacing: 0.08em;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
 		}
 
 		.lightbox {
@@ -368,6 +657,10 @@
 		}
 
 		@media (min-width: 720px) {
+			.about-layout {
+				grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+			}
+
 			.bio-grid {
 				grid-template-columns: repeat(2, minmax(0, 1fr));
 			}
@@ -381,6 +674,10 @@
 
 			.hero-content {
 				gap: 2rem;
+			}
+
+			.about-layout {
+				gap: 3.2rem;
 			}
 
 			.bio-grid {
@@ -400,10 +697,10 @@
 			<span class="pill">Visual Artist</span>
 			<h1>Ivan focuses on mostly pencil and paper portraits, though they also experiment with other mediums.</h1>
 			<p>
-				From pencil portraits to bold digital experiments, these pieces explore the interplay of light, shadow, and emotion. They aspire to become a tattoo artist after finishing college at the <a href="https://www.cia.edu" target="_blank" rel="noopener noreferrer">Cleveland Institute of Art</a>.
+				From pencil portraits to digital experiments, these pieces are a reflection of their artistic passion. They aspire to become a tattoo artist after finishing college at the Cleveland Institute of Art.
 			</p>
 			<div class="cta-row">
-				<a class="cta-button" href="https://instagram.com/ivanguyvan" target="_blank" rel="noopener noreferrer">
+				<a class="cta-button" href="https://www.instagram.com/_b_r_a_i_n_z_/" target="_blank" rel="noopener noreferrer">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<rect x="3" y="3" width="18" height="18" rx="5"></rect>
 						<path d="M16 11.37A3.37 3.37 0 1 1 12.63 8 3.37 3.37 0 0 1 16 11.37z"></path>
@@ -419,8 +716,8 @@
 		<section id="about">
 			<h2>About the Work</h2>
 			<p class="section-intro">
-				Ivan starts every project by observing small moments—a gesture, a change in light, a story overheard. Sketchbooks,
-				photographs, and digital layering come together to hold onto that feeling long enough to share it.
+				Ivan expresses themselves through their art; whether it's a portrait capturing emotion, or a simple doodle of their character, Gunther, these creations always reflect what they felt in the moment.
+				
 			</p>
 		</section>
 
@@ -442,7 +739,7 @@
 				<article>
 					<h3>Recent Moments</h3>
 					<p>
-						Recently completed a series of digital paintings exploring light and color, alongside traditional pencil portraits capturing human expression.
+						Recently has been experimenting with ink in skin, aka tattooing, specifically handpoking small pieces onto fake skin.
 					</p>
 				</article>
 			</div>
@@ -455,54 +752,157 @@
 			</p>
 			<div class="gallery-grid" role="list">
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241114_Meyers_Evian_DigitalPainting_Clown.jpg" data-title="Carnival Current" data-description="Digital painting chasing playful expression and saturated light.">
-						<img src="portfolio/20241114_Meyers_Evian_DigitalPainting_Clown.jpg" alt="Digital painting of a clown with saturated color titled Carnival Current." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20251120_231748.jpg" data-title="Luminous Stretch" data-description="Late-night study exploring motion with layered color washes.">
+						<img src="portfolio/portfolio/20251120_231748.jpg" alt="Expressive figure rendered in layered color titled Luminous Stretch." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Luminous Stretch</span>
+						<small>Mixed media · 2025</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpeg" data-title="Steady Gaze" data-description="Graphite portrait built around quiet confidence and soft gradients.">
-						<img src="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpeg" alt="Graphite portrait of a subject with soft gradients titled Steady Gaze." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20251112_155825.jpg" data-title="Nocturne Echo" data-description="Portrait built from graphite, charcoal, and digital tinting.">
+						<img src="portfolio/portfolio/20251112_155825.jpg" alt="Moody graphite portrait with violet tint titled Nocturne Echo." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Nocturne Echo</span>
+						<small>Graphite & digital tint</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpg" data-title="Contour Lines" data-description="Pencil study tracing profile movement and layered shading.">
-						<img src="portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpg" alt="Pencil profile study with layered shading titled Contour Lines." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20251031_015922.jpg" data-title="Halloween Bloom" data-description="Seasonal illustration blending ink outlines with luminous gradients.">
+						<img src="portfolio/portfolio/20251031_015922.jpg" alt="Vibrant seasonal illustration with glowing gradients titled Halloween Bloom." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Halloween Bloom</span>
+						<small>Ink & digital color</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241114_Meyers_Evian_SketchBookPge_ColoredPncil.jpg" data-title="Notebook Color Drift" data-description="Sketchbook page mixing colored pencil gradients with handwritten notes.">
-						<img src="portfolio/20241114_Meyers_Evian_SketchBookPge_ColoredPncil.jpg" alt="Sketchbook page with colored pencil gradients and notes titled Notebook Color Drift." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20250213_004808.jpg" data-title="Sleepless Draft" data-description="Loose pencil work capturing a fleeting, late-night expression.">
+						<img src="portfolio/portfolio/20250213_004808.jpg" alt="Loose pencil portrait with gestural shading titled Sleepless Draft." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Sleepless Draft</span>
+						<small>Graphite on paper</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241114_Meyers_Evian_Sketchbook_Page_AcrylicPnt_ColoredPncil_Pencil.jpg" data-title="Layer Notes" data-description="Acrylic, pencil, and colored pencil stacked to map a dreamlike structure.">
-						<img src="portfolio/20241114_Meyers_Evian_Sketchbook_Page_AcrylicPnt_ColoredPncil_Pencil.jpg" alt="Multimedia sketchbook page with acrylic washes and line work titled Layer Notes." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/IMG_20251021_221832_224.jpg" data-title="Signal Study" data-description="Color exploration using gel pen overlays across pencil groundwork.">
+						<img src="portfolio/portfolio/IMG_20251021_221832_224.jpg" alt="Layered portrait with neon accents titled Signal Study." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Signal Study</span>
+						<small>Gel pen & pencil</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Portrait_Micron_Marker.jpg" data-title="Ink Rhythm" data-description="Micron marker portrait exploring rhythm through parallel lines.">
-						<img src="portfolio/20241115_Meyers_Evian_Portrait_Micron_Marker.jpg" alt="Micron marker portrait with parallel linework titled Ink Rhythm." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/IMG_20250125_150216_788.webp" data-title="Studio Wall" data-description="Snapshot of pinned sketches and color tests inside the studio.">
+						<img src="portfolio/portfolio/IMG_20250125_150216_788.webp" alt="Collage of sketches on a studio wall titled Studio Wall." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Studio Wall</span>
+						<small>Process documentation</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Portrait_Pen_and_Colored_Pencil.jpg" data-title="Warm Echo" data-description="Pen and colored pencil portrait balancing glow and calm shadows.">
-						<img src="portfolio/20241115_Meyers_Evian_Portrait_Pen_and_Colored_Pencil.jpg" alt="Pen and colored pencil portrait with warm gradients titled Warm Echo." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/RDT_20251022_1856032730948031073509067.jpg" data-title="Signal Bloom" data-description="Layered mixed media piece balancing organic linework and bold color.">
+						<img src="portfolio/portfolio/RDT_20251022_1856032730948031073509067.jpg" alt="Bold mixed-media portrait titled Signal Bloom." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Signal Bloom</span>
+						<small>Mixed media collage</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Postcard_Drawing_Marker_GelPen_ColoredPncil.jpeg" data-title="Postcard Sparks" data-description="Marker and gel pen postcard filled with quick energy and bright edges.">
-						<img src="portfolio/20241115_Meyers_Evian_Postcard_Drawing_Marker_GelPen_ColoredPncil.jpeg" alt="Color-rich postcard drawing with energetic strokes titled Postcard Sparks." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20241122_Meyers_Evian_Figure_Study_Pencil.jpg" data-title="Morning Figure" data-description="Gesture drawing in pencil focusing on weight and lift.">
+						<img src="portfolio/portfolio/20241122_Meyers_Evian_Figure_Study_Pencil.jpg" alt="Pencil figure drawing capturing weight and lift titled Morning Figure." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Morning Figure</span>
+						<small>Graphite gesture study</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241115_Meyers_Evian_Scorpion_Micron_Marker.jpg" data-title="Scorpion Lines" data-description="Micron drawing studying armor, curve, and balance.">
-						<img src="portfolio/20241115_Meyers_Evian_Scorpion_Micron_Marker.jpg" alt="Micron marker drawing of a scorpion titled Scorpion Lines." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20241115_Meyers_Evian_Scorpion_Micron_Marker.jpg" data-title="Scorpion Lines" data-description="Micron drawing studying armor, curve, and balance.">
+						<img src="portfolio/portfolio/20241115_Meyers_Evian_Scorpion_Micron_Marker.jpg" alt="Micron marker drawing of a scorpion titled Scorpion Lines." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Scorpion Lines</span>
+						<small>Micron marker study</small>
+					</figcaption>
 				</figure>
 				<figure class="art-card" role="listitem">
-					<button type="button" data-full="portfolio/20241122_Meyers_Evian_Figure_Study_Pencil.jpg" data-title="Morning Figure" data-description="Gesture drawing in pencil focusing on weight and lift.">
-						<img src="portfolio/20241122_Meyers_Evian_Figure_Study_Pencil.jpg" alt="Pencil figure drawing capturing weight and lift titled Morning Figure." loading="lazy" />
+					<button type="button" data-full="portfolio/portfolio/20241115_Meyers_Evian_Postcard_Drawing_Marker_GelPen_ColoredPncil.jpeg" data-title="Postcard Sparks" data-description="Marker and gel pen postcard filled with quick energy and bright edges.">
+						<img src="portfolio/portfolio/20241115_Meyers_Evian_Postcard_Drawing_Marker_GelPen_ColoredPncil.jpeg" alt="Color-rich postcard drawing with energetic strokes titled Postcard Sparks." loading="lazy" />
 					</button>
+					<figcaption>
+						<span>Postcard Sparks</span>
+						<small>Marker & gel pen</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241115_Meyers_Evian_Portrait_Pen_and_Colored_Pencil.jpg" data-title="Warm Echo" data-description="Pen and colored pencil portrait balancing glow and calm shadows.">
+						<img src="portfolio/portfolio/20241115_Meyers_Evian_Portrait_Pen_and_Colored_Pencil.jpg" alt="Pen and colored pencil portrait with warm gradients titled Warm Echo." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Warm Echo</span>
+						<small>Pen & colored pencil</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241115_Meyers_Evian_Portrait_Micron_Marker.jpg" data-title="Ink Rhythm" data-description="Micron marker portrait exploring rhythm through parallel lines.">
+						<img src="portfolio/portfolio/20241115_Meyers_Evian_Portrait_Micron_Marker.jpg" alt="Micron marker portrait with parallel linework titled Ink Rhythm." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Ink Rhythm</span>
+						<small>Micron marker</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241114_Meyers_Evian_Sketchbook_Page_AcrylicPnt_ColoredPncil_Pencil.jpg" data-title="Layer Notes" data-description="Acrylic, pencil, and colored pencil stacked to map a dreamlike structure.">
+						<img src="portfolio/portfolio/20241114_Meyers_Evian_Sketchbook_Page_AcrylicPnt_ColoredPncil_Pencil.jpg" alt="Multimedia sketchbook page with acrylic washes and line work titled Layer Notes." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Layer Notes</span>
+						<small>Acrylic & colored pencil</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241114_Meyers_Evian_SketchBookPge_ColoredPncil.jpg" data-title="Notebook Color Drift" data-description="Sketchbook page mixing colored pencil gradients with handwritten notes.">
+						<img src="portfolio/portfolio/20241114_Meyers_Evian_SketchBookPge_ColoredPncil.jpg" alt="Sketchbook page with colored pencil gradients and notes titled Notebook Color Drift." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Notebook Color Drift</span>
+						<small>Colored pencil sketchbook</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpg" data-title="Contour Lines" data-description="Pencil study tracing profile movement and layered shading.">
+						<img src="portfolio/portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpg" alt="Pencil profile study with layered shading titled Contour Lines." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Contour Lines</span>
+						<small>Graphite portrait</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpeg" data-title="Steady Gaze" data-description="Graphite portrait built around quiet confidence and soft gradients.">
+						<img src="portfolio/portfolio/20241114_Meyers_Evian_Portrait_Pencil.jpeg" alt="Graphite portrait of a subject with soft gradients titled Steady Gaze." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Steady Gaze</span>
+						<small>Graphite portrait</small>
+					</figcaption>
+				</figure>
+				<figure class="art-card" role="listitem">
+					<button type="button" data-full="portfolio/portfolio/20241114_Meyers_Evian_DigitalPainting_Clown.jpg" data-title="Carnival Current" data-description="Digital painting chasing playful expression and saturated light.">
+						<img src="portfolio/portfolio/20241114_Meyers_Evian_DigitalPainting_Clown.jpg" alt="Digital painting of a clown with saturated color titled Carnival Current." loading="lazy" />
+					</button>
+					<figcaption>
+						<span>Carnival Current</span>
+						<small>Digital painting</small>
+					</figcaption>
 				</figure>
 			</div>
 		</section>
@@ -511,7 +911,7 @@
 	<footer>
 		<div>
 			<strong>&copy; <span id="year"></span> Ivan Guyvan</strong>
-			<span>Portfolio curated for collectors, collaborators, and curious minds.</span>
+			<span>Portfolio curated for curious minds.</span>
 		</div>
 	</footer>
 
